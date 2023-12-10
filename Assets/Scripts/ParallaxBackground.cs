@@ -4,17 +4,43 @@ using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-    [SerializeField] private Transform cam;
+    public enum ObjeOnRoad
+    {
+        Stars,
+        Beach,
+        Sea,
+        Wave,
+        Night
+    }
+    public ObjeOnRoad currentObje;
     [SerializeField] private Vector3 startPos;
     [SerializeField] private float moveSpeed;
-    // Start is called before the first frame update
+   
     void Start()
     {
         startPos = transform.localPosition;
-        //moveSpeed = .5f;
+
+        switch (currentObje)
+        {
+            case ObjeOnRoad.Stars:
+                moveSpeed = .2f*2;
+                break;
+            case ObjeOnRoad.Beach:
+                moveSpeed = 1.7f*2;
+                break;
+            case ObjeOnRoad.Wave:
+                moveSpeed = 1*2;
+                break;
+            case ObjeOnRoad.Sea:
+                moveSpeed = .4f*2;
+                break;
+            case ObjeOnRoad.Night:
+                moveSpeed = .2f*2;
+                break;
+               }
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
  
@@ -23,12 +49,7 @@ public class ParallaxBackground : MonoBehaviour
         if (transform.localPosition.x<=startPos.x-120)
         {
             transform.localPosition = new Vector3(startPos.x,transform.localPosition.y,transform.localPosition.z);
-            Debug.Log("asda");
         }
-        if (cam.position.x >= transform.position.x + 120) 
-        {
-            Debug.Log("aa");
-            cam.position = new Vector2(transform.position.x + 120f, transform.position.y);
-        }
+       
     }
 }
